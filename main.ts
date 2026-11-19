@@ -43,7 +43,7 @@ function retryDelay(attempt: number): number {
  * a network error or another status is retried, since the env may still be starting.
  */
 async function register(port: number): Promise<void> {
-  for (let attempt = 0; ; attempt += 1) {
+  for (let attempt = 0; true; attempt += 1) {
     try {
       const res = await fetch(`${ENV_URL}/register`, {
         method: 'POST',
@@ -62,7 +62,7 @@ async function register(port: number): Promise<void> {
 
 /** Poll GET /done until it answers {"done":true}; never return before that. */
 async function waitForDone(): Promise<void> {
-  for (let attempt = 0; ; attempt += 1) {
+  for (let attempt = 0; true; attempt += 1) {
     try {
       const res = await fetch(`${ENV_URL}/done`, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
       if (res.ok) {
